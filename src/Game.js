@@ -1,23 +1,23 @@
 (function(exports) {
-  function Game() {
-    this.player_x = new Player('X');
-    this.player_o = new Player('O');
-    this.board = new Board();
+  function Game(player_x, player_o, board) {
+    this.player_x = player_x;
+    this.player_o = player_o;
+    this.board = board;
     this.currentPlayer = this.player_x;
   }
 
-  Game.prototype.claimField = function(x,y) {
-    this.board.newBoard[x][y] = this.currentPlayer.getSymbol();
-    this._switchTurns();
-    return this.board.newBoard;
+  Game.prototype.play = function(x,y) {
+    if (this.board.isFieldClaimed(x,y)) {
+      throw "This field is already claimed";
+    } else {
+      this.board.placeSymbol(x,y,(this.currentPlayer.getSymbol()));
+      this._switchTurns();
+      return this.board.getBoard();
+    }
   };
 
   Game.prototype._switchTurns = function () {
-    if (this.currentPlayer === this.player_x) {
-      this.currentPlayer = this.player_o;
-    } else {
-      this.currentPlayer = this.player_x;
-    }
+    (this.currentPlayer === this.player_x) ? (this.currentPlayer = this.player_o) : (this.currentPlayer = this.player_x);
     return this.currentPlayer;
   };
 
