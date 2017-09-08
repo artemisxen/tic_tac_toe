@@ -7,7 +7,8 @@ describe ('Board', function() {
   });
 
   it('starts with an empty 2d board', function() {
-    expect(board.newBoard).toBeArray;
+    expect(board.newBoard.length).toEqual(3);
   });
+
 
 });
