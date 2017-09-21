@@ -12,7 +12,6 @@
   };
 
   Board.prototype.isFieldClaimed = function (x,y) {
-    console.log(this.getBoard()[x][y]);
     if (this.getBoard()[x][y] !== null){
       return true;
     } else {
